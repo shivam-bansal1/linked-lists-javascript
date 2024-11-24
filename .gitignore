@@ -1,0 +1,5 @@
+# Node.js
+node_modules/
+
+# Dependency lock files (optional)
+package-lock.json
