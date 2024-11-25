@@ -1,6 +1,7 @@
 {
   "name": "linked-list",
   "version": "1.0.0",
+  "type": "module",
   "description": "Project to create linked list data structure using javascript",
   "main": "index.js",
   "dependencies": {
