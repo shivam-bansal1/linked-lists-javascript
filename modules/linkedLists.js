@@ -104,6 +104,63 @@ export class LinkedList {
     return null;
   }
 
+  insertAt(value, index) {
+    if (index > this.size())
+      return `Index out of range! . Size of list is ${this.size()}`;
+
+    if (index === 0) this.prepend(value);
+    else if (index === this.size()) this.append(value);
+    else {
+      let previousNode = this.head,
+        iterator = 0;
+
+      while (iterator !== index - 1) {
+        previousNode = previousNode.nextNode;
+        iterator += 1;
+      }
+
+      let newNode = new Node(value);
+      newNode.nextNode = previousNode.nextNode;
+      previousNode.nextNode = newNode;
+    }
+
+    return `Node added successfully at index: ${index}`;
+  }
+
+  removeAt(index) {
+    if (this.head === 0)
+      return "Listt is already empty! Can't remove from empty list.";
+
+    if (index > this.size() - 1)
+      return `Index out of range! . Size of list is ${this.size()}`;
+
+    // Remove first node
+    if (index === 0) this.head = this.head.nextNode;
+    // Remove last node
+    else if (index === this.size() - 1) {
+      let previousNode = this.head;
+
+      while (previousNode.nextNode != this.tail) {
+        previousNode = previousNode.nextNode;
+      }
+
+      previousNode.nextNode = null;
+      this.tail = previousNode;
+    } else {
+      let previousNode = this.head,
+        iterator = 0;
+
+      while (iterator !== index - 1) {
+        previousNode = previousNode.nextNode;
+        iterator += 1;
+      }
+
+      previousNode.nextNode = previousNode.nextNode.nextNode;
+    }
+
+    return `Node successfully removed from index: ${index}`;
+  }
+
   toString() {
     if (this.head === null) return "The list is empty.";
 
@@ -119,12 +176,3 @@ export class LinkedList {
     return resultString;
   }
 }
-
-let ll = new LinkedList();
-
-ll.prepend(3);
-ll.prepend(99);
-ll.append(100);
-console.log(ll.toString());
-console.log(ll.contains(0));
-console.log(ll.find(99));
